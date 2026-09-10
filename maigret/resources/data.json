@@ -24978,6 +24978,9 @@
             "absenceStrs": [
                 "Пользователь не выбран"
             ],
+            "presenseStrs": [
+                "Зарегистрирован"
+            ],
             "alexaRank": 527465,
             "urlMain": "https://www.aqa.ru/",
             "url": "https://www.aqa.ru/forum/member.php?action=viewpro&member={username}",
