@@ -20404,6 +20404,7 @@
             "usernameUnclaimed": "noonewouldeverusethis7"
         },
         "Amperka": {
+            "disabled": true,
             "tags": [
                 "forum",
                 "ru"
