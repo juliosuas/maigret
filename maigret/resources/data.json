@@ -30558,7 +30558,13 @@
                 "coding",
                 "education"
             ],
-            "checkType": "status_code",
+            "checkType": "message",
+            "presenseStrs": [
+                "\"model\":{\"id\":"
+            ],
+            "absenceStrs": [
+                "\"error\":\"Not Found\""
+            ],
             "regexCheck": "^[^\\.]+$",
             "urlMain": "https://www.hackerrank.com/",
             "url": "https://www.hackerrank.com/profile/{username}",
