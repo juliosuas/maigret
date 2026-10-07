@@ -452,10 +452,10 @@
             },
             "checkType": "message",
             "presenseStrs": [
-                "\"nickname\":"
+                "\"uniqueId\":"
             ],
             "absenceStrs": [
-                "serverCode\":404"
+                "\"statusCode\":10221"
             ],
             "alexaRank": 24,
             "urlMain": "https://www.tiktok.com/",
