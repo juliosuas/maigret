@@ -1,6 +1,6 @@
 # Maigret database
 
-The file was updated on 2026-10-04. Maigret currently supports 7922 sites.
+The file was updated on 2026-10-07. Maigret currently supports 7922 sites.
 
 ## Contents
 
@@ -69,7 +69,7 @@ The file was updated on 2026-10-04. Maigret currently supports 7922 sites.
 - (224)	`/profile/{username}`
 - (159)	`/users/{username}`
 - (143)	`{urlMain}/u/{username} (Lemmy)`
-- (139)	`/u/{username}`
+- (138)	`/u/{username}`
 - (137)	`{urlMain}{urlSubpath}/member.php?username={username} (vBulletin)`
 - (137)	`{urlMain}/u/{username} (Flarum)`
 - (133)	`{urlMain}{urlSubpath}/User:{username} (MediaWikiJson/w)`
