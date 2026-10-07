@@ -549,6 +549,29 @@ def test_rajce_requires_profile_marker(default_db):
     assert generic["status"].status == MaigretCheckStatus.AVAILABLE
 
 
+def test_discord_invalid_username_is_not_claimed(default_db):
+    site = default_db.sites_dict["Discord"]
+
+    assert re.search(site.regex_check, "blue")
+    assert re.search(site.regex_check, "a.b_c")
+    assert not re.search(site.regex_check, "John-Doe9x7")
+    assert not re.search(site.regex_check, "a..b")
+
+    claimed = _process_default_site(site, '{"taken":true}', username="blue")
+    free = _process_default_site(site, '{"taken":false}', username="random")
+    invalid = _process_default_site(
+        site,
+        '{"code": 50035, "errors": {"username": {"_errors": '
+        '[{"code": "USERNAME_INVALID_CHARACTERS"}]}}}',
+        status_code=400,
+        username="John-Doe9x7",
+    )
+
+    assert claimed["status"].status == MaigretCheckStatus.CLAIMED
+    assert free["status"].status == MaigretCheckStatus.AVAILABLE
+    assert invalid["status"].status == MaigretCheckStatus.UNKNOWN
+
+
 def test_process_site_result_with_error_is_unknown():
     site = _make_site({"checkType": "status_code"})
     info = {"username": "a", "parsing_enabled": False, "url_user": "https://x/a"}

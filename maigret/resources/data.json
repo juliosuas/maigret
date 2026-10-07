@@ -1096,7 +1096,7 @@
             "url": "https://discord.com",
             "urlMain": "https://discord.com/",
             "urlProbe": "https://discord.com/api/v9/unique-username/username-attempt-unauthed",
-            "regexCheck": "^[^\\u3040-\\u30ff\\u3400-\\u4dbf\\u4e00-\\u9fff\\uac00-\\ud7af\\uf900-\\ufaff]{2,32}$",
+            "regexCheck": "^(?!.*\\.\\.)[a-zA-Z0-9_\\.]{2,32}$",
             "checkType": "message",
             "absenceStrs": [
                 "{\"taken\":false}"
@@ -1116,7 +1116,9 @@
                 "You are being rate limited": "Rate limited",
                 "rate_limited": "Rate limited",
                 "BASE_TYPE_BAD_LENGTH": "Invalid username length",
-                "Must be between 2 and 32 in length": "Invalid username length"
+                "Must be between 2 and 32 in length": "Invalid username length",
+                "USERNAME_INVALID_CHARACTERS": "Invalid username",
+                "USERNAME_INVALID_REPEATING_DOTS": "Invalid username"
             },
             "tags": [
                 "gaming",
