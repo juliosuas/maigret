@@ -1,6 +1,6 @@
 # Maigret database
 
-The file was updated on 2026-10-04. Maigret currently supports 7922 sites.
+The file was updated on 2026-10-07. Maigret currently supports 7922 sites.
 
 ## Contents
 
@@ -18,16 +18,16 @@ The file was updated on 2026-10-04. Maigret currently supports 7922 sites.
 
 ### Coverage
 
-- **Enabled sites:** 7224/7922 = 91.19%
-- **Check types:** message 3913 (54.17%), status_code 3234 (44.77%), response_url 77 (1.07%)
+- **Enabled sites:** 7223/7922 = 91.18%
+- **Check types:** message 3912 (54.16%), status_code 3234 (44.77%), response_url 77 (1.07%)
 - **Countries:** 77 tagged, 4461 sites (56.31%) have no country tag
 
 ### Check strength
 
-- **Weak-signal checks:** 3913/7224 = 54.17% (status code checks, plus message checks missing a string)
-- **Status code checks:** 3234/7224 = 44.77% (existence inferred from the HTTP code alone)
-- **Message checks missing a string:** 679/7224 = 9.4% (presence or absence strings, not both)
-- **Message checks without presence markers:** 245/7224 = 3.39% (subset of the line above, absence strings are the only signal)
+- **Weak-signal checks:** 3913/7223 = 54.17% (status code checks, plus message checks missing a string)
+- **Status code checks:** 3234/7223 = 44.77% (existence inferred from the HTTP code alone)
+- **Message checks missing a string:** 679/7223 = 9.4% (presence or absence strings, not both)
+- **Message checks without presence markers:** 245/7223 = 3.39% (subset of the line above, absence strings are the only signal)
 
 ### Special cases
 
@@ -84,7 +84,7 @@ The file was updated on 2026-10-04. Maigret currently supports 7922 sites.
 - `DiscourseJson`: 1232/1232 (100.0%)
 - `Discourse`: 758/766 (99.0%)
 - `uCoz`: 633/709 (89.3%)
-- `XenForo`: 565/615 (91.9%)
+- `XenForo`: 564/615 (91.7%)
 - `Gitea`: 365/365 (100.0%)
 - `MediaWikiJson`: 296/296 (100.0%)
 - `GitLab`: 248/248 (100.0%)
@@ -2028,7 +2028,7 @@ Rank data fetched from Majestic Million by domains.
 1. ![](https://www.google.com/s2/favicons?domain=https://forums.tauck.com) [ForumTauck (https://forums.tauck.com)](https://forums.tauck.com)*: top 100M, discussion, forum, travel*
 1. ![](https://www.google.com/s2/favicons?domain=https://ptvintern.picarto.tv) [Picarto (https://ptvintern.picarto.tv)](https://ptvintern.picarto.tv)*: top 100M, art, gaming, streaming*
 1. ![](https://www.google.com/s2/favicons?domain=https://forum.popjustice.com) [popjustice (https://forum.popjustice.com)](https://forum.popjustice.com)*: top 100M, co, forum, sg*, search is disabled
-1. ![](https://www.google.com/s2/favicons?domain=http://forum.amperka.ru) [Amperka (http://forum.amperka.ru)](http://forum.amperka.ru)*: top 100M, forum, ru*
+1. ![](https://www.google.com/s2/favicons?domain=http://forum.amperka.ru) [Amperka (http://forum.amperka.ru)](http://forum.amperka.ru)*: top 100M, forum, ru*, search is disabled
 1. ![](https://www.google.com/s2/favicons?domain=https://nl.pepper.com/) [Pepper NL (https://nl.pepper.com/)](https://nl.pepper.com/)*: top 100M, discussion, nl, shopping*
 1. ![](https://www.google.com/s2/favicons?domain=http://dpils-scooter.ucoz.lv) [dpils-scooter.ucoz.lv (http://dpils-scooter.ucoz.lv)](http://dpils-scooter.ucoz.lv)*: top 100M, ru, ua*
 1. ![](https://www.google.com/s2/favicons?domain=http://sokal.ucoz.lv) [sokal.ucoz.lv (http://sokal.ucoz.lv)](http://sokal.ucoz.lv)*: top 100M, ru, ua*
