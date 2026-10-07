@@ -1,6 +1,6 @@
 # Maigret database
 
-The file was updated on 2026-10-04. Maigret currently supports 7922 sites.
+The file was updated on 2026-10-07. Maigret currently supports 7922 sites.
 
 ## Contents
 
@@ -18,16 +18,16 @@ The file was updated on 2026-10-04. Maigret currently supports 7922 sites.
 
 ### Coverage
 
-- **Enabled sites:** 7224/7922 = 91.19%
-- **Check types:** message 3913 (54.17%), status_code 3234 (44.77%), response_url 77 (1.07%)
+- **Enabled sites:** 7223/7922 = 91.18%
+- **Check types:** message 3912 (54.16%), status_code 3234 (44.77%), response_url 77 (1.07%)
 - **Countries:** 77 tagged, 4461 sites (56.31%) have no country tag
 
 ### Check strength
 
-- **Weak-signal checks:** 3913/7224 = 54.17% (status code checks, plus message checks missing a string)
-- **Status code checks:** 3234/7224 = 44.77% (existence inferred from the HTTP code alone)
-- **Message checks missing a string:** 679/7224 = 9.4% (presence or absence strings, not both)
-- **Message checks without presence markers:** 245/7224 = 3.39% (subset of the line above, absence strings are the only signal)
+- **Weak-signal checks:** 3912/7223 = 54.16% (status code checks, plus message checks missing a string)
+- **Status code checks:** 3234/7223 = 44.77% (existence inferred from the HTTP code alone)
+- **Message checks missing a string:** 678/7223 = 9.39% (presence or absence strings, not both)
+- **Message checks without presence markers:** 244/7223 = 3.38% (subset of the line above, absence strings are the only signal)
 
 ### Special cases
 
@@ -2115,7 +2115,7 @@ Rank data fetched from Majestic Million by domains.
 1. ![](https://www.google.com/s2/favicons?domain=http://new.sexopedia.ru) [Sexopedia (http://new.sexopedia.ru)](http://new.sexopedia.ru)*: top 100M, erotic, ru*, search is disabled
 1. ![](https://www.google.com/s2/favicons?domain=http://forum.postupim.ru) [forum.postupim.ru (http://forum.postupim.ru)](http://forum.postupim.ru)*: top 100M, education, forum, ru*
 1. ![](https://www.google.com/s2/favicons?domain=https://forum.igrarena.ru) [igrarena (https://forum.igrarena.ru)](https://forum.igrarena.ru)*: top 100M, forum, ru*
-1. ![](https://www.google.com/s2/favicons?domain=http://forum.sanatorii.by) [sanatorii (http://forum.sanatorii.by)](http://forum.sanatorii.by)*: top 100M, by, forum, ru*
+1. ![](https://www.google.com/s2/favicons?domain=http://forum.sanatorii.by) [sanatorii (http://forum.sanatorii.by)](http://forum.sanatorii.by)*: top 100M, by, forum, ru*, search is disabled
 1. ![](https://www.google.com/s2/favicons?domain=https://forum.wowcircle.net) [WOW Circle (https://forum.wowcircle.net)](https://forum.wowcircle.net)*: top 100M, forum, it, ru*
 1. ![](https://www.google.com/s2/favicons?domain=https://gam1ng.com.br) [Gam1ng (https://gam1ng.com.br)](https://gam1ng.com.br)*: top 100M, br, webcam*, search is disabled
 1. ![](https://www.google.com/s2/favicons?domain=https://forum.hiveos.farm) [hiveos.farm (https://forum.hiveos.farm)](https://forum.hiveos.farm)*: top 100M, at, cz, forum, ru*

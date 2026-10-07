@@ -102,3 +102,9 @@ def test_social_networks_have_social_tag(default_db):
         f"{len(missing_social)} known social networks missing 'social' tag: "
         + ", ".join(missing_social)
     )
+
+
+def test_sanatorii_disabled_read_only_archive(default_db):
+    """forum.sanatorii.by returns the same read-only archive page for every username."""
+    site = default_db.sites_dict["sanatorii"]
+    assert site.disabled is True
