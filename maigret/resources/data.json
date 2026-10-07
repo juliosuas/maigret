@@ -15379,7 +15379,7 @@
             "checkType": "status_code",
             "alexaRank": 18900,
             "urlMain": "https://lobste.rs/",
-            "url": "https://lobste.rs/u/{username}",
+            "url": "https://lobste.rs/~{username}",
             "usernameClaimed": "jcs",
             "usernameUnclaimed": "noonewouldeverusethis7"
         },
