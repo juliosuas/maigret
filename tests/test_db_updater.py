@@ -7,6 +7,7 @@ from datetime import datetime, timezone, timedelta
 from unittest.mock import patch, MagicMock
 
 import pytest
+import requests
 
 from maigret.db_updater import (
     _parse_version,
@@ -234,3 +235,110 @@ def test_force_update_download_fails(mock_fetch, mock_download, tmp_path):
         with patch("maigret.db_updater.STATE_PATH", str(tmp_path / "state.json")):
             with patch("maigret.db_updater.CACHED_DB_PATH", str(tmp_path / "missing.json")):
                 assert force_update() is False
+
+
+# --- proxy plumbing (issue #3108) ---
+
+PROXY = "socks5://127.0.0.1:9050"
+# PySocks resolves socks5:// locally; socks5h:// keeps DNS at the proxy.
+PROXIES = {
+    "http": "socks5h://127.0.0.1:9050",
+    "https": "socks5h://127.0.0.1:9050",
+}
+
+
+def _response(payload: bytes):
+    response = MagicMock()
+    response.status_code = 200
+    response.content = payload
+    response.json.return_value = json.loads(payload)
+    return response
+
+
+def _meta_and_db():
+    payload = json.dumps({"sites": {}, "engines": {}, "tags": []}).encode()
+    meta = {
+        "min_maigret_version": "0.1.0",
+        "sites_count": 3200,
+        "updated_at": "2099-01-01T00:00:00Z",
+        "data_url": "https://example.com/data.json",
+        "data_sha256": hashlib.sha256(payload).hexdigest(),
+    }
+    return json.dumps(meta).encode(), payload
+
+
+def _patch_paths(tmp_path, cache_name="missing.json"):
+    return (
+        patch("maigret.db_updater.MAIGRET_HOME", str(tmp_path)),
+        patch("maigret.db_updater.STATE_PATH", str(tmp_path / "state.json")),
+        patch("maigret.db_updater.CACHED_DB_PATH", str(tmp_path / cache_name)),
+    )
+
+
+def _assert_every_request_used_proxy(mock_get):
+    assert mock_get.call_count >= 1
+    for call in mock_get.call_args_list:
+        assert call.kwargs["proxies"] == PROXIES
+
+
+@patch("maigret.db_updater.requests.get")
+def test_resolve_db_path_sends_update_fetches_through_proxy(mock_get, tmp_path):
+    meta_body, db_body = _meta_and_db()
+    mock_get.side_effect = [_response(meta_body), _response(db_body)]
+    cached = tmp_path / "data.json"
+    home, state, cache = _patch_paths(tmp_path, cache_name="data.json")
+    with home, state, cache:
+        assert resolve_db_path("resources/data.json", proxy=PROXY) == str(cached)
+
+    assert mock_get.call_count == 2
+    _assert_every_request_used_proxy(mock_get)
+    assert mock_get.call_args_list[0].args[0].endswith("/db_meta.json")
+    assert mock_get.call_args_list[1].args[0] == "https://example.com/data.json"
+
+
+@patch("maigret.db_updater.requests.get")
+def test_resolve_db_path_without_proxy_omits_proxies_argument(mock_get, tmp_path):
+    mock_get.side_effect = requests.exceptions.ConnectionError("offline")
+    home, state, cache = _patch_paths(tmp_path)
+    with home, state, cache:
+        assert resolve_db_path("resources/data.json") == BUNDLED_DB_PATH
+
+    assert mock_get.call_count == 1
+    assert "proxies" not in mock_get.call_args.kwargs
+
+
+@patch("maigret.db_updater.requests.get")
+def test_resolve_db_path_proxy_failure_does_not_retry_direct(mock_get, tmp_path):
+    mock_get.side_effect = requests.exceptions.ConnectionError("proxy refused")
+    home, state, cache = _patch_paths(tmp_path)
+    with home, state, cache:
+        assert resolve_db_path("resources/data.json", proxy=PROXY) == BUNDLED_DB_PATH
+
+    assert mock_get.call_count == 1
+    _assert_every_request_used_proxy(mock_get)
+
+
+@patch("maigret.db_updater.requests.get")
+def test_resolve_db_path_download_failure_does_not_retry_direct(mock_get, tmp_path):
+    meta_body, _db_body = _meta_and_db()
+    mock_get.side_effect = [
+        _response(meta_body),
+        requests.exceptions.ConnectionError("proxy refused"),
+    ]
+    home, state, cache = _patch_paths(tmp_path)
+    with home, state, cache:
+        assert resolve_db_path("resources/data.json", proxy=PROXY) == BUNDLED_DB_PATH
+
+    assert mock_get.call_count == 2
+    _assert_every_request_used_proxy(mock_get)
+
+
+@patch("maigret.db_updater.requests.get")
+def test_force_update_proxy_failure_does_not_retry_direct(mock_get, tmp_path):
+    mock_get.side_effect = requests.exceptions.ConnectionError("proxy refused")
+    home, state, cache = _patch_paths(tmp_path)
+    with home, state, cache:
+        assert force_update(proxy=PROXY) is False
+
+    assert mock_get.call_count == 1
+    _assert_every_request_used_proxy(mock_get)
